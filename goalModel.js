@@ -3,7 +3,7 @@ var mongoose= require("mongoose");
 var Schema=mongoose.Schema
 
 var goalSchema = new Schema({
-    goal:{type: String},
+    name:{type: String},
     deadline: {type: String},
     category: {type: String},
     image_url: {type: String},
@@ -16,7 +16,7 @@ var goalSchema = new Schema({
 var Goal=mongoose.model('goal',goalSchema)
 
 var newGoal= new Goal({
-  goal:  "Finish this project",
+  name:  "Finish this project",
   deadline: "8 July 2017",
   category: "Studies",
   importance: 5,
