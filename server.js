@@ -14,70 +14,49 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+var handler=function(res,next){
+ return function(err, beer) {
+    if (err) {
+      return next(err);
+    }
+    res.send(beer);
+  }
+}
 //Get goals
 
 app.get('/goals', function (req, res, next) {
-  Goal.find(function (err, data) {
-    if (err) {
-      return next(err);
-    } else {
-      res.send(data);
-    }
-  })
+  Goal.find(handler(res, next));
 })
 
 //add goal
 
 app.post('/goals', function (req, res, next) {
-  Goal.create(req.body, function (err, data) {
-    if (err) {
-      return next(err);
-    } else {
-      res.send(data);
-    }
-  })
+  Goal.create(req.body, handler(res, next));
 });
 
 //delete goal
 
 app.delete("/goals/:goalId",function(req,res,next){
   var goalId = req.params.goalId;
-  Goal.findByIdAndRemove(goalId, function(err,data){
-    if (err) {
-      return next(err);
-    } else {
-      res.send(data);
-    }
+  Goal.findByIdAndRemove(goalId, handler(res, next));
   })
-})
+
 //update goal
 
 app.put("/goals/:goalId",function(req,res,next){
   var goalId=req.params.goalId;
-  Goal.findByIdAndUpdate(req.body, {new:true}, function(err,data){
-       if (err) {
-      return next(err);
-    } else {
-      res.send(data);
-    }
+  Goal.findByIdAndUpdate(req.body, {new:true}, handler(res, next));
   })
-})
 
 //update importance rating(if group working wih goal)
 
 app.post('/goals/:goalId/importanceRating',function(req,res,next){
   var goalId= req.params.goalId;
   var updateObject={ $push: { importanceRating: req.body.rating } }
-  Goal.findByIdAndUpdate(goalId, updateObject, {new:true}, function(err,data){
-    if (err) {
-      return next(err);
-    } else {
-      res.send(data);
-    }
+  Goal.findByIdAndUpdate(goalId, updateObject, {new:true}, handler(res, next));
   })
-})
 
-//
 
 
 
