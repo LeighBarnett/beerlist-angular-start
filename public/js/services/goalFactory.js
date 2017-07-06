@@ -18,6 +18,13 @@ app.factory('goalFactory', function($http) {
             });
     };
 
+    goalFactory.updateGoal = function(goal) {
+    return $http.put('/goals/' + goal._id, goal)
+      .then(function(response) {
+        return response.data
+      });
+  };
+
     goalFactory.removeGoal = function(goalId) {
         return $http.delete('/goals/' + goalId)
             .then(function(response) {

@@ -47,8 +47,9 @@ app.delete("/goals/:goalId", function(req, res, next) {
 
 app.put("/goals/:goalId", function(req, res, next) {
     var goalId = req.params.goalId;
-    Goal.findByIdAndUpdate(req.body, { new: true }, handler(res, next));
+    Goal.findByIdAndUpdate(goalId, req.body, { new: true }, handler(res, next));
 })
+
 
 //update importance rating(if group working wih goal)
 
