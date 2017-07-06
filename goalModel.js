@@ -7,20 +7,19 @@ var goalSchema = new Schema({
     deadline: {type: String},
     category: {type: String},
     image_url: {type: String},
-    importance:{type: Number},
-    urgency:{type: Number},
+    importance:{type: String},
+    urgency:{type: String},
     importanceRating: [Number],
     urgencyRating: [Number],
-    percentageCompleted:{type: Number}
+    percentageCompleted:{type: Number},
+    date: Date
 })
 var Goal=mongoose.model('goal',goalSchema)
 
 var newGoal= new Goal({
   name:  "Finish this project",
   deadline: "8 July 2017",
-  category: "Studies",
-  importance: 5,
-  urgency:4
+  category: "Studies"
 })
 
 // newGoal.save();

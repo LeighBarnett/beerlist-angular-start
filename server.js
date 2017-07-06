@@ -40,7 +40,7 @@ app.post('/goals', function(req, res, next) {
 
 app.delete("/goals/:goalId", function(req, res, next) {
     var goalId = req.params.goalId;
-    Goal.findByIdAndRemove(goalId, { new: true }, handler(res, next));
+    Goal.findByIdAndRemove(goalId, handler(res, next));
 })
 
 //update goal

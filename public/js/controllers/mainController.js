@@ -1,6 +1,9 @@
 app.controller('goalController', function($scope, goalFactory) {
+
+
     $scope.goals = [];
     $scope.addGoal = function(newGoal) {
+        $scope.newGoal.date = new Date()
         goalFactory.addGoal(newGoal)
             .then(function(newGoalData) {
                 $scope.goals.push(newGoalData);
