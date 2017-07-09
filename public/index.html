@@ -14,97 +14,17 @@
                 </div>
             </div>
         </div>
-        <section ng-controller="goalController">
-            <button type="button" class="btn btn-default" ng-click="openAddGoal()">Open me!</button>
-            <div class="row">
-                <div class="col-md-3">
-                    <h3>Add a new goal</h3>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Goal" ng-model="newGoal.name"></input>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Deadline" ng-model="newGoal.deadline"></input>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Category" ng-model="newGoal.category"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="sel1">How important is this goal?</label>
-                        <select class="form-control" ng-model="newGoal.importance">
-                            <option value: "Unimportant">Unimportant</option>
-                            <option value: "Moderate">Moderate</option>
-                            <option value: "Critical">Critical</option>
-                        </select>
-                    </div>
-                    <button type="button" ng-click="addGoal(newGoal)" class="btn btn-primary">Add</button>
-                </div>
-                <div class="col-md-9">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Goal</th>
-                                <th>Deadline</th>
-                                <th>Category</th>
-                                <th>Importance</th>
-                                <th>Completed</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="goal in goals track by $index">
-                                    <td ng-hide="tempGoal">{{goal.date}}</td>
-                                    <td ng-hide="tempGoal">{{goal.name}}</td>
-                                    <td ng-hide="tempGoal">{{goal.deadline}}</td>
-                                    <td ng-hide="tempGoal">{{goal.category}}</td>
-                                    <td ng-hide="tempGoal">{{goal.importance}}</td>
-                                    <td ng-hide="tempGoal">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td ng-hide="tempGoal">
-                                        <button type="button" ng-click="editGoal($index)">Edit</button>
-                                    </td>
-                                    <td ng-hide="tempGoal">
-                                        <button type="button" ng-click="removeGoal(goal)"> X </button>
-                                    </td>
-                              
-                              
-                                    <td ng-show="tempGoal">{{goal.date}}</td>
-                                    <td ng-show="tempGoal">
-                                        <input type="text" ng-model="goal.name">
-                                    </td>
-                                    <td ng-show="tempGoal">
-                                        <input type="text" ng-model="goal.deadline"> </td>
-                                    <td ng-show="tempGoal">
-                                        <input type="text" ng-model="goal.category"> </td>
-                                    <td ng-show="tempGoal">{{goal.importance}}</td>
-                                    <td ng-show="tempGoal">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td ng-show="tempGoal">
-                                        <button type="button" ng-click="updateGoal($index)">Update</button>
-                                        <button type="button" ng-click="cancelEdit($index)">Cancel</button>
-                                    </td>
-                                    <td ng-show="tempGoal">
-                                        <button type="button" ng-click="removeGoal(goal)"> X </button>
-                                    </td>
-                                
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-
-
-                </div>
-        </section>
+        <div ui-view></div>
         </div>
         <script src="angular/angular.js"></script>
+        <script src="@uirouter/core/_bundles/ui-router-core.js"></script>
+        <script src="@uirouter/angularjs/release/ui-router-angularjs.js"></script>
         <script src="angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
         <script src="angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
         <script src="js/app.js"></script>
         <script src="js/services/goalFactory.js"></script>
         <script src="js/controllers/mainController.js"></script>
+        <script src="js/controllers/goalIndividualController.js"></script>
 </body>
 
 </html>

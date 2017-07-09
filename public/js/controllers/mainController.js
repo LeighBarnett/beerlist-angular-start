@@ -3,7 +3,7 @@ app.controller('goalController', function($uibModal, $scope, goalFactory) {
 
     $scope.goals = [];
     $scope.addGoal = function(newGoal) {
-        $scope.newGoal.date = new Date()
+        newGoal.date = new Date()
         goalFactory.addGoal(newGoal)
             .then(function(newGoalData) {
                 $scope.goals.push(newGoalData);
