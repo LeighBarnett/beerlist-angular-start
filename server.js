@@ -65,7 +65,22 @@ app.post('/goals/:goalId/tasks', function(req, res, next) {
 Goal.findByIdAndUpdate(goalId,{$push:{tasks:req.body.tasks}}, {new:true},handler(res,next))
 });
 
+//delete task
 
+app.delete('/goals/:goalId/tasks/taskId', function(req, res, next) {
+    var goalId= req.params.goalId;
+    var taskId= req.params.taskId;
+Goal.findByIdAndRemove(goalId,{$pull:{tasks:{_id: taskId}}},{new:true}, handler(res,next))
+});
+
+//change rating
+
+app.post('/goals/:goalId/importanceRating', function(req, res, next) {
+   
+    var updateObject = {$push:{importanceRating: req.body.importanceRating}}; 
+  
+    Goal.findByIdAndUpdate(req.param.goalId, updateObject, { new: true }, handler(res,next))
+});
 
 
 // error handler to catch 404 and forward to main error handler
