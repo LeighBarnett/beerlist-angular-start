@@ -59,8 +59,11 @@ app.post('/goals/:goalId/importanceRating', function(req, res, next) {
     Goal.findByIdAndUpdate(goalId, updateObject, { new: true }, handler(res, next));
 })
 
-
-
+//add task to goal
+app.post('/goals/:goalId/tasks', function(req, res, next) {
+    var goalId= req.params.goalId;
+Goal.findByIdAndUpdate(goalId,{$push:{tasks:req.body.tasks}}, {new:true},handler(res,next))
+});
 
 
 
