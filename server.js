@@ -61,25 +61,31 @@ app.post('/goals/:goalId/importanceRating', function(req, res, next) {
 
 //add task to goal
 app.post('/goals/:goalId/tasks', function(req, res, next) {
-    var goalId= req.params.goalId;
-Goal.findByIdAndUpdate(goalId,{$push:{tasks:req.body.tasks}}, {new:true},handler(res,next))
+    var goalId = req.params.goalId;
+    Goal.findByIdAndUpdate(goalId, { $push: { tasks: req.body } }, { new: true }, handler(res, next))
 });
 
 //delete task
 
 app.delete('/goals/:goalId/tasks/taskId', function(req, res, next) {
-    var goalId= req.params.goalId;
-    var taskId= req.params.taskId;
-Goal.findByIdAndRemove(goalId,{$pull:{tasks:{_id: taskId}}},{new:true}, handler(res,next))
+    var goalId = req.params.goalId;
+    var taskId = req.params.taskId;
+    Goal.findByIdAndRemove(goalId, { $pull: { tasks: { _id: taskId } } }, { new: true }, handler(res, next))
 });
+
+//refresh task
+
+app.get('/goals/:goalId', function(req, res, next) {
+    Goal.findById(req.params.goalId, handler(res, next))
+})
 
 //change rating
 
 app.post('/goals/:goalId/importanceRating', function(req, res, next) {
-   
-    var updateObject = {$push:{importanceRating: req.body.importanceRating}}; 
-  
-    Goal.findByIdAndUpdate(req.param.goalId, updateObject, { new: true }, handler(res,next))
+
+    var updateObject = { $push: { importanceRating: req.body.importanceRating } };
+
+    Goal.findByIdAndUpdate(req.param.goalId, updateObject, { new: true }, handler(res, next))
 });
 
 

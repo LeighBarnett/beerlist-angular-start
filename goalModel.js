@@ -23,7 +23,7 @@ var goalSchema = new Schema({
     urgencyRating: [Number],
     percentageCompleted: { type: Number },
     date: Date,
-    task: [taskSchema]
+    tasks: [taskSchema]
 })
 var Goal = mongoose.model('goal', goalSchema)
 

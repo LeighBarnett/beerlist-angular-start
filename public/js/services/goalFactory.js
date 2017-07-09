@@ -25,6 +25,23 @@ app.factory('goalFactory', function($http) {
       });
   };
 
+  goalFactory.getIndivGoal=function(goalId){
+    return $http.get('/goals/' + goalId)
+      .then(function(response) {
+         return response.data
+      }, function(err) {
+        console.error(err)
+      });
+  };
+
+  goalFactory.addTask=function(newTask, goalId){
+   return $http.post('/goals/'+ goalId +'/tasks', newTask)
+            .then(function(response) {
+                return angular.copy(response.data);
+            });
+    };
+
+
     goalFactory.removeGoal = function(goalId) {
         return $http.delete('/goals/' + goalId)
             .then(function(response) {
