@@ -67,10 +67,10 @@ app.post('/goals/:goalId/tasks', function(req, res, next) {
 
 //delete task
 
-app.delete('/goals/:goalId/tasks/taskId', function(req, res, next) {
+app.delete('/goals/:goalId/tasks/:taskId', function(req, res, next) {
     var goalId = req.params.goalId;
     var taskId = req.params.taskId;
-    Goal.findByIdAndRemove(goalId, { $pull: { tasks: { _id: taskId } } }, { new: true }, handler(res, next))
+    Goal.findByIdAndUpdate(goalId, { $pull: { tasks: { _id: taskId } } }, handler(res, next))
 });
 
 //refresh task

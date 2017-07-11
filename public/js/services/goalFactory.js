@@ -37,9 +37,17 @@ app.factory('goalFactory', function($http) {
   goalFactory.addTask=function(newTask, goalId){
    return $http.post('/goals/'+ goalId +'/tasks', newTask)
             .then(function(response) {
-                return angular.copy(response.data);
+                return response;
             });
     };
+
+ goalFactory.deleteTask = function(taskId, goalId) {
+
+        return $http.delete('/goals/' + goalId + '/tasks/' +taskId)
+            .then(function(response) {
+                return angular.copy(response.data);
+            });
+          };
 
 
     goalFactory.removeGoal = function(goalId) {

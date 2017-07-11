@@ -20,7 +20,9 @@
             </select>
         </div>
         <button type="button" ng-click="addTask(newTask, goal._id)" class="btn btn-primary">Add</button>
-        <div ng-repeat="task in tasks track by $index"><div>
-
-    </div>
-</div>
+        <div ng-repeat="task in goal.tasks track by $index">
+            <div>{{task.name}} <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
+            </div>
+            <div>
+            </div>
+        </div>
