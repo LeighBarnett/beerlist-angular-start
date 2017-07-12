@@ -1,6 +1,8 @@
 var app = angular.module('goalist', ['ui.bootstrap', 'ui.router']);
 
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+
     $stateProvider
         .state('home', {
             url: '/home',
@@ -15,7 +17,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             },
             controller: 'goalIndividualController',
             templateUrl: '/templates/goal.html',
-        });
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: '/templates/register.html',
+            controller: 'authCtrl'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: '/templates/login.html',
+            controller: 'authCtrl'
+        })
 
     $urlRouterProvider.otherwise('/home');
 }]);

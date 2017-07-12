@@ -1,11 +1,17 @@
-var express = require('express');
-var bodyParser = require('body-parser')
-var mongoose = require('mongoose')
+var express = require('express')
+var expressSession = require('express-session');
+var bodyParser = require('body-parser');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+var goalRoutes = require('./routes/goalRoutes');
+var userRoutes = require('./routes/userRoutes');
+var User = require('./models/userModel')
+
 mongoose.connect('mongodb://localhost/goalistDB', function() {
     console.log("DB connection established!!!");
 })
 
-var Goal = require("./goalModel")
 var app = express();
 
 app.use(express.static('public'));
@@ -15,80 +21,30 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-var handler = function(res, next) {
-        return function(err, goal) {
-            if (err) {
-                return next(err);
-            }
-            res.send(goal);
-        }
-    }
-    //Get goals
 
-app.get('/goals', function(req, res, next) {
-    Goal.find(handler(res, next));
-})
+app.use(expressSession({
+    secret: 'yourSecretHere',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-//add goal
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser()); 
+passport.deserializeUser(User.deserializeUser());
 
-app.post('/goals', function(req, res, next) {
-    console.log(req.body)
-    Goal.create(req.body, handler(res, next));
+
+app.use('/goals', goalRoutes);
+app.use('/users', userRoutes);
+
+
+
+//this below route will make sure index.html is served
+//for any unhandled routes
+app.all('[^.]+', function(req, res) {
+  res.sendFile(__dirname + "/public/index.html");
 });
-
-//delete goal
-
-app.delete("/goals/:goalId", function(req, res, next) {
-    var goalId = req.params.goalId;
-    Goal.findByIdAndRemove(goalId, handler(res, next));
-})
-
-//update goal
-
-app.put("/goals/:goalId", function(req, res, next) {
-    var goalId = req.params.goalId;
-    Goal.findByIdAndUpdate(goalId, req.body, { new: true }, handler(res, next));
-})
-
-
-//update importance rating(if group working wih goal)
-
-app.post('/goals/:goalId/importanceRating', function(req, res, next) {
-    var goalId = req.params.goalId;
-    var updateObject = { $push: { importanceRating: req.body.rating } }
-    Goal.findByIdAndUpdate(goalId, updateObject, { new: true }, handler(res, next));
-})
-
-//add task to goal
-app.post('/goals/:goalId/tasks', function(req, res, next) {
-    var goalId = req.params.goalId;
-    Goal.findByIdAndUpdate(goalId, { $push: { tasks: req.body } }, { new: true }, handler(res, next))
-});
-
-//delete task
-
-app.delete('/goals/:goalId/tasks/:taskId', function(req, res, next) {
-    var goalId = req.params.goalId;
-    var taskId = req.params.taskId;
-    Goal.findByIdAndUpdate(goalId, { $pull: { tasks: { _id: taskId } } }, handler(res, next))
-});
-
-//refresh task
-
-app.get('/goals/:goalId', function(req, res, next) {
-    Goal.findById(req.params.goalId, handler(res, next))
-})
-
-//change rating
-
-app.post('/goals/:goalId/importanceRating', function(req, res, next) {
-
-    var updateObject = { $push: { importanceRating: req.body.importanceRating } };
-
-    Goal.findByIdAndUpdate(req.param.goalId, updateObject, { new: true }, handler(res, next))
-});
-
-
 // error handler to catch 404 and forward to main error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -105,6 +61,11 @@ app.use(function(err, req, res, next) {
         error: err
     });
 });
+
+app.all('*', function(req, res) {
+  res.sendFile(__dirname + "/public/index.html")
+})
+
 app.listen(8000, function() {
     console.log("yo yo yo, on 8000!!")
 });
