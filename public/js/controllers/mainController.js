@@ -5,26 +5,33 @@ app.controller('goalController', function($uibModal, $scope, goalFactory) {
 
     $scope.openAddGoal = function() {
         $uibModal.open({
-            scope:$scope,
+            scope: $scope,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'addGoalTemplate.html',
+            templateUrl: '../templates/addGoalTemplate.html',
             controller: function($scope, $uibModalInstance) {
                 $scope.addGoal = function(newGoal) {
-                    newGoal.date = new Date()
+                    $scope.date = new Date()
+                
                     goalFactory.addGoal(newGoal)
                         .then(function(newGoalData) {
                             $scope.goals.push(newGoalData);
                             $uibModalInstance.close($scope.newGoal);
                         })
                 };
+
+
+                $scope.closeAddGoal = function() {
+                    $uibModalInstance.dismiss()
+                }
+
             }
         }).result.catch(function(error) {
             console.log(error)
         });
 
     }
-
+  
 
 
     $scope.editGoal = function(index) {

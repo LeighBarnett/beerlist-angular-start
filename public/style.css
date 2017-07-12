@@ -1,3 +1,14 @@
-.addAGoal{
-	margin: 10px;
+.addAGoal {
+    margin: 10px;
+}
+
+.addGoalForm {
+    padding: 20px;
+}
+
+.closeModal {
+	float:right;
+	padding:20px;
+	background-color: white;
+	border:none;
 }

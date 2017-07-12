@@ -21,15 +21,16 @@ app.factory('authFactory', function($http, $state) {
         return $http.get('/users/currentUser')
             .then(function(response) {
                 auth.currentUser.username = response.data.username;
-                $state.go("login");
+                if(auth.currentUser.username==null)
+                    {$state.go("login")};
             })
     };
 
     auth.logout = function(currentUser) {
-      return $http.get('/users/logout')
+        return $http.get('/users/logout')
             .then(function(response) {
                 auth.currentUser.username = null;
-$state.go("login")
+                $state.go("login")
             })
     };
 

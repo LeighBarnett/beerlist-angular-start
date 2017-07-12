@@ -1,22 +1,12 @@
-app.controller('masterController', function($uibModal, $scope, authFactory, $log) {
+app.controller('masterController', function($uibModal, $scope, authFactory) {
     $scope.currentUser = authFactory.currentUser;
     authFactory.getCurrentUser();
     $scope.logout = function() {
         authFactory.logout($scope.currentUser)
     };
-  $scope.items = [
-    'The first choice!',
-    'And another choice for you.',
-    'but wait! A third!'
-  ];
+  
 
-  $scope.status = {
-    isopen: false
-  };
 
-  $scope.toggled = function(open) {
-    $log.log('Dropdown is now: ', open);
-  };
 
   $scope.toggleDropdown = function($event) {
     $event.preventDefault();

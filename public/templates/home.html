@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="goal in goals track by $index">
-                    <td ng-hide="tempGoal">{{goal.date}}</td>
+                    <td ng-hide="tempGoal">{{goal.date | date : 'mediumDate'}}</td>
                     <td ng-hide="tempGoal">{{goal.name}}</td>
                     <td ng-hide="tempGoal">{{goal.deadline}}</td>
                     <td ng-hide="tempGoal">{{goal.category}}</td>
