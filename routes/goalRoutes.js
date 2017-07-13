@@ -4,34 +4,19 @@ var Goal = require("../models/goalModel");
 
 
 var handler = function(res, next) {
-        return function(err, goal) {
+        return function(err, response) {
             if (err) {
                 return next(err);
             }
-            res.send(goal);
+            res.send(response);
         }
     }
     //Get goals
 
 router.get('/', function(req, res, next) {
-    Goal.find(handler(res, next));
+    Goal.find({user: req.user._id},handler(res, next));
 })
 
-// router.get('/',function(req,res,next){
-
-// })
-
-
-// router.get('/:userId', function(req, res, next) {
-//     var userId = req.params.userId;
-//     User.findById(userId).populate('goals').exec(function(err, goal) {
-//         if (err) {
-//             console.error(err);
-//         } else {
-//             console.log(goals);
-//         }
-//     })
-// })
 
 //add goal
 

@@ -1,4 +1,4 @@
-app.controller('goalController', function($uibModal, $scope, goalFactory) {
+app.controller('goalController', function($uibModal, $scope, goalFactory, authFactory) {
 
 
     $scope.goals = [];
@@ -11,17 +11,13 @@ app.controller('goalController', function($uibModal, $scope, goalFactory) {
             templateUrl: '../templates/addGoalTemplate.html',
             controller: function($scope, $uibModalInstance) {
 
-                $scope.newGoal = { date: new Date() };
+                $scope.newGoal = { date: new Date(), user: authFactory.currentUser.id};
 
                 $scope.clear = function() {
                     $scope.newGoal.deadline = null;
                 };
 
-                // $scope.inlineOptions = {
-                //     // customClass: getDayClass,
-                //     minDate: new Date(),
-                //     showWeeks: true
-                // };
+               
 
                 $scope.dateOptions = {
 
@@ -41,37 +37,8 @@ app.controller('goalController', function($uibModal, $scope, goalFactory) {
                     opened: false
                 };
 
-                // var tomorrow = new Date();
-                // tomorrow.setDate(tomorrow.getDate() + 1);
-
-                // var afterTomorrow = new Date();
-                // afterTomorrow.setDate(tomorrow.getDate() + 1);
-
-                // $scope.events = [{
-                //     date: tomorrow,
-                //     status: 'full'
-                // }, {
-                //     date: afterTomorrow,
-                //     status: 'partially'
-                // }];
-
-                // function getDayClass(data) {
-                //     var date = data.date,
-                //         mode = data.mode;
-                //     if (mode === 'day') {
-                //         var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                //         for (var i = 0; i < $scope.events.length; i++) {
-                //             var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                //             if (dayToCheck === currentDay) {
-                //                 return $scope.events[i].status;
-                //             }
-                //         }
-                //     }
-
-                //     return '';
-                // }
+       
+             
 
                 $scope.addGoal = function(newGoal) {
                     goalFactory.addGoal(newGoal)
@@ -81,80 +48,7 @@ app.controller('goalController', function($uibModal, $scope, goalFactory) {
                         })
                 };
 
-                // $scope.today = function() {
-                //     $scope.dt = new Date();
-                // };
-                // $scope.today();
-
-                // $scope.clear = function() {
-                //     $scope.dt = null;
-                // };
-
-                // $scope.inlineOptions = {
-                //     customClass: getDayClass,
-                //     minDate: new Date(),
-                //     showWeeks: true
-                // };
-
-                // $scope.dateOptions = {
-
-                //     formatYear: 'yy',
-                //     maxDate: new Date(2020, 5, 22),
-                //     minDate: new Date(),
-                //     startingDay: 1
-                // };
-
-
-
-
-                // $scope.open1 = function() {
-                //     $scope.popup1.opened = true;
-                // };
-
-
-
-                // $scope.setDate = function(year, month, day) {
-                //     $scope.dt = new Date(year, month, day);
-                // };
-
-                // $scope.format = 'dd-MMMM-yyyy';
-
-
-                // $scope.popup1 = {
-                //     opened: false
-                // };
-
-
-                // var tomorrow = new Date();
-                // tomorrow.setDate(tomorrow.getDate() + 1);
-                // var afterTomorrow = new Date();
-                // afterTomorrow.setDate(tomorrow.getDate() + 1);
-                // $scope.events = [{
-                //     date: tomorrow,
-                //     status: 'full'
-                // }, {
-                //     date: afterTomorrow,
-                //     status: 'partially'
-                // }];
-
-                // function getDayClass(data) {
-                //     var date = data.date,
-                //         mode = data.mode;
-                //     if (mode === 'day') {
-                //         var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                //         for (var i = 0; i < $scope.events.length; i++) {
-                //             var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                //             if (dayToCheck === currentDay) {
-                //                 return $scope.events[i].status;
-                //             }
-                //         }
-                //     }
-
-                //     return '';
-                // }
-
+ 
 
                 $scope.closeAddGoal = function() {
                     $uibModalInstance.dismiss()
@@ -206,7 +100,6 @@ app.controller('goalController', function($uibModal, $scope, goalFactory) {
         goalFactory.removeGoal(goalId)
             .then(function(goal) {
                 for (var i = 0; i < $scope.goals.length; i++) {
-                    //ask about goal._id below
                     if (goal._id == $scope.goals[i]._id) {
 
                         $scope.goals.splice(i, 1)

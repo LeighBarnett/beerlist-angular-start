@@ -35,7 +35,15 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.use('/goals', goalRoutes);
+var ensureAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    return res.status('401').send({message: "Unauthorized" });
+  }
+};
+
+app.use('/goals', ensureAuthenticated, goalRoutes);
 app.use('/users', userRoutes);
 
 

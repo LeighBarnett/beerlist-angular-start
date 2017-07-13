@@ -12,11 +12,11 @@
             <input type="text" class="form-control" placeholder="Deadline" ng-model="newTask.deadline"></input>
         </div>
         <div class="form-group">
-            <label for="sel1">How important is this task?</label>
-            <select class="form-control" ng-model="newTask.importance">
-                <option value: "Unimportant">Unimportant</option>
-                <option value: "Moderate">Moderate</option>
-                <option value: "Critical">Critical</option>
+            <label for="sel1">Priority</label>
+            <select class="form-control" ng-model="newTask.priority">
+                <option value: "Low">Low</option>
+                <option value: "Medium">Medium</option>
+                <option value: "High">High</option>
             </select>
         </div>
         <button type="button" ng-click="addTask(newTask, goal._id)" class="btn btn-primary">Add</button>

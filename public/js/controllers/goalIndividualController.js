@@ -1,5 +1,5 @@
 app.controller('goalIndividualController', function($uibModal, $scope, goalFactory, $stateParams) {
-    
+
     if (!$stateParams.goalParam) {
         var goalId = $stateParams.id
         goalFactory.getIndivGoal(goalId)
@@ -23,23 +23,23 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
         });
     }
 
-$scope.deleteTask=function(task,goalId){
-    var taskId=task._id
-goalFactory.deleteTask(taskId,goalId)
-.then(function(response) {
-            for (var i = 0; i < $scope.goal.tasks.length; i++) {
-                if (task._id == $scope.goal.tasks[i]._id) {
+    $scope.deleteTask = function(task, goalId) {
+        var taskId = task._id
+        goalFactory.deleteTask(taskId, goalId)
+            .then(function(response) {
+                for (var i = 0; i < $scope.goal.tasks.length; i++) {
+                    if (task._id == $scope.goal.tasks[i]._id) {
 
-                    $scope.goal.tasks.splice(i, 1)
-                    break;
+                        $scope.goal.tasks.splice(i, 1)
+                        break;
+                    }
                 }
-            }
 
-        })
-        .catch(function(error) {
-            console.log(error)
-        });
-}
+            })
+            .catch(function(error) {
+                console.log(error)
+            });
+    }
 
 
 

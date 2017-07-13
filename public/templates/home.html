@@ -14,7 +14,7 @@
                     <th>Deadline</th>
                     <th>Category</th>
                     <th>Tasks</th>
-                    <th>Importance</th>
+                    <th>Priority</th>
                     <th>Completed</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -22,12 +22,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="goal in goals track by $index">
-                    <td ng-hide="tempGoal">{{goal.date | date : 'mediumDate'}}</td>
+                    <td ng-hide="tempGoal">{{goal.date | date : 'shortDate'}}</td>
                     <td ng-hide="tempGoal">{{goal.name}}</td>
-                    <td ng-hide="tempGoal">{{goal.deadline | date:'fullDate'}}</td>
+                    <td ng-hide="tempGoal">{{goal.deadline | date:'shortDate'}}</td>
                     <td ng-hide="tempGoal">{{goal.category}}</td>
                     <td ng-hide="tempGoal"><a ui-sref="goal({id: goal._id, goalParam: goal})">Tasks</a></td>
-                    <td ng-hide="tempGoal">{{goal.importance}}</td>
+                    <td ng-hide="tempGoal">{{goal.priority}}</td>
                     <td ng-hide="tempGoal">
                         <input type="checkbox">
                     </td>
@@ -45,7 +45,7 @@
                         <input type="text" ng-model="goal.deadline"> </td>
                     <td ng-show="tempGoal">
                         <input type="text" ng-model="goal.category"> </td>
-                    <td ng-show="tempGoal">{{goal.importance}}</td>
+                    <td ng-show="tempGoal">{{goal.priority}}</td>
                     <td ng-show="tempGoal">
                         <input type="checkbox">
                     </td>

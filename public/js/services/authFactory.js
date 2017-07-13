@@ -21,8 +21,9 @@ app.factory('authFactory', function($http, $state) {
         return $http.get('/users/currentUser')
             .then(function(response) {
                 auth.currentUser.username = response.data.username;
-                if(auth.currentUser.username==null)
-                    {$state.go("login")};
+                auth.currentUser.id = response.data._id;
+
+                if (auth.currentUser.username == null) { $state.go("login") };
             })
     };
 
