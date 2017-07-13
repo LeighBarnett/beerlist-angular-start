@@ -17,6 +17,22 @@ router.get('/', function(req, res, next) {
     Goal.find(handler(res, next));
 })
 
+// router.get('/',function(req,res,next){
+
+// })
+
+
+// router.get('/:userId', function(req, res, next) {
+//     var userId = req.params.userId;
+//     User.findById(userId).populate('goals').exec(function(err, goal) {
+//         if (err) {
+//             console.error(err);
+//         } else {
+//             console.log(goals);
+//         }
+//     })
+// })
+
 //add goal
 
 router.post('/', function(req, res, next) {

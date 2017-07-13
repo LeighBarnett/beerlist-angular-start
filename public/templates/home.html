@@ -24,7 +24,7 @@
                 <tr ng-repeat="goal in goals track by $index">
                     <td ng-hide="tempGoal">{{goal.date | date : 'mediumDate'}}</td>
                     <td ng-hide="tempGoal">{{goal.name}}</td>
-                    <td ng-hide="tempGoal">{{goal.deadline}}</td>
+                    <td ng-hide="tempGoal">{{goal.deadline | date:'fullDate'}}</td>
                     <td ng-hide="tempGoal">{{goal.category}}</td>
                     <td ng-hide="tempGoal"><a ui-sref="goal({id: goal._id, goalParam: goal})">Tasks</a></td>
                     <td ng-hide="tempGoal">{{goal.importance}}</td>

@@ -1,23 +1,64 @@
-    <form ng-submit="addGoal()" class="addGoalForm">
-                <button type="button" ng-click="closeAddGoal()" class="closeModal">x</button>
-
-        <h3>Add a new goal </h3>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Goal" ng-model="newGoal.name"></input>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Deadline" ng-model="newGoal.deadline"></input>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Category" ng-model="newGoal.category"></input>
-        </div>
-        <div class="form-group">
-            <label for="sel1">How important is this goal?</label>
-            <select class="form-control" ng-model="newGoal.importance">
-                <option value: "Unimportant">Unimportant</option>
-                <option value: "Moderate">Moderate</option>
-                <option value: "Critical">Critical</option>
-            </select>
-        </div>
-        <button type="button" ng-click="addGoal(newGoal)" class="btn btn-primary">Add</button>
-    </form>
+<form ng-submit="addGoal()" class="addGoalForm">
+    <button type="button" ng-click="closeAddGoal()" class="closeModal">x</button>
+    <h3>Add a new goal </h3>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Goal" ng-model="newGoal.name"></input>
+    </div>
+<!--     <div class="form-group">
+ -->        <!--   <input type="text" class="form-control" placeholder="Deadline" ng-model="newGoal.deadline"></input> -->
+        <!-- </div> -->
+        <p class="input-group">
+            <input type="text" placeholder="Deadline" class="form-control" uib-datepicker-popup="{{format}}" ng-model="newGoal.deadline" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+          
+        </p>
+    <!-- </div> -->
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Category" ng-model="newGoal.category"></input>
+    </div>
+    <div class="form-group">
+        <label for="sel1">How important is this goal?</label>
+        <select class="form-control" ng-model="newGoal.importance">
+            <option value: "Unimportant">Unimportant</option>
+            <option value: "Moderate">Moderate</option>
+            <option value: "Critical">Critical</option>
+        </select>
+    </div>
+    <button type="button" ng-click="addGoal(newGoal)" class="btn btn-primary">Add</button>
+</form>
+<!-- <div> -->
+<!-- <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre> -->
+<!--   <h4>Popup</h4> -->
+<!--    <div class="row">
+      <div class="col-md-6"> -->
+<!-- <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+ -->
+<!--    </div> -->
+<!--    <div class="col-md-6">
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div> -->
+<!--   </div> -->
+<!--     <div class="row">
+      <div class="col-md-6">
+        <label>Format: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
+      </div>
+    </div>
+ -->
+<!-- 
+    <hr />
+    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+   
+    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button> -->
+<!-- </div> -->

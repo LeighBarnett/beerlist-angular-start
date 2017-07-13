@@ -24,6 +24,7 @@ var goalSchema = new Schema({
     percentageCompleted: { type: Number },
     date: Date,
     tasks: [taskSchema]
+    user: {type: Schema.Types.ObjectId, ref: 'user' }
 })
 var Goal = mongoose.model('goal', goalSchema)
 
