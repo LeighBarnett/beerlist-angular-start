@@ -1,26 +1,22 @@
 <form ng-submit="addGoal()" class="addGoalForm">
-    <button type="button" ng-click="closeAddGoal()" class="closeModal">x</button>
-    <h3>Add a new goal </h3>
-    <div class="form-group">
+     <button type="button" ng-click="closeAddGoal()" class="closeModal">x</button>
+    <h3>Add a new goal    
+ </h3>
+    <div class="form-group nameAndDeadline">
         <input type="text" class="form-control" placeholder="Goal" ng-model="newGoal.name"></input>
     </div>
-<!--     <div class="form-group">
- -->        <!--   <input type="text" class="form-control" placeholder="Deadline" ng-model="newGoal.deadline"></input> -->
-        <!-- </div> -->
-        <p class="input-group">
-            <input type="text" placeholder="Deadline" class="form-control" uib-datepicker-popup="{{format}}" ng-model="newGoal.deadline" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}"/>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+        <p class="input-group" >
+            <input type="text"  placeholder="Deadline" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="newGoal.deadline" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open1()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}"/>
+          <span class="input-group-btn" >
+            <button type="button" class="btn btn-default" id="calendar" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
-          
         </p>
-    <!-- </div> -->
-    <div class="form-group">
+    <div class="form-group" id="category">
         <input type="text" class="form-control" placeholder="Category" ng-model="newGoal.category"></input>
     </div>
-    <div class="form-group">
-        <label for="sel1">Priority</label>
+    <div class="form-group" id="priority">
         <select class="form-control" ng-model="newGoal.priority">
+            <option value="" selected hidden >Priority</option>
             <option value: "Low">Low</option>
             <option value: "Medium">Medium</option>
             <option value: "High">High</option>

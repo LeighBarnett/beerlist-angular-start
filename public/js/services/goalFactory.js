@@ -19,35 +19,42 @@ app.factory('goalFactory', function($http) {
     };
 
     goalFactory.updateGoal = function(goal) {
-    return $http.put('/goals/' + goal._id, goal)
-      .then(function(response) {
-        return response.data
-      });
-  };
+        return $http.put('/goals/' + goal._id, goal)
+            .then(function(response) {
+                return response.data
+            });
+    };
 
-  goalFactory.getIndivGoal=function(goalId){
-    return $http.get('/goals/' + goalId)
-      .then(function(response) {
-         return response.data
-      }, function(err) {
-        console.error(err)
-      });
-  };
+    goalFactory.getIndivGoal = function(goalId) {
+        return $http.get('/goals/' + goalId)
+            .then(function(response) {
+                return response.data
+            }, function(err) {
+                console.error(err)
+            });
+    };
 
-  goalFactory.addTask=function(newTask, goalId){
-   return $http.post('/goals/'+ goalId +'/tasks', newTask)
+    goalFactory.addTask = function(newTask, goalId) {
+        return $http.post('/goals/' + goalId + '/tasks', newTask)
             .then(function(response) {
                 return response;
             });
     };
 
- goalFactory.deleteTask = function(taskId, goalId) {
+    goalFactory.updateTask = function(goalId, taskId, task) {
+        return $http.put('/goals/' + goalId + '/tasks/' + taskId, task)
+            .then(function(response) {
+                return response.data
+            });
+    };
 
-        return $http.delete('/goals/' + goalId + '/tasks/' +taskId)
+    goalFactory.deleteTask = function(taskId, goalId) {
+
+        return $http.delete('/goals/' + goalId + '/tasks/' + taskId)
             .then(function(response) {
                 return angular.copy(response.data);
             });
-          };
+    };
 
 
     goalFactory.removeGoal = function(goalId) {

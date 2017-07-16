@@ -1,28 +1,47 @@
 <div class="page-header">
     <a ui-sref="home">Home</a>
-    <h3>
-    <span>{{goal.name}}</span>
-  </h3>
+    <h1>Goal: {{goal.name}}</h1>
+    <h2>Deadline: {{goal.deadline | date:'shortDate'}}</h2>
     <div>
-        <h3>Add a New Task</h3>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Task" ng-model="newTask.name"></input>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Deadline" ng-model="newTask.deadline"></input>
-        </div>
-        <div class="form-group">
-            <label for="sel1">Priority</label>
-            <select class="form-control" ng-model="newTask.priority">
-                <option value: "Low">Low</option>
-                <option value: "Medium">Medium</option>
-                <option value: "High">High</option>
-            </select>
-        </div>
-        <button type="button" ng-click="addTask(newTask, goal._id)" class="btn btn-primary">Add</button>
-        <div ng-repeat="task in goal.tasks track by $index">
-            <div>{{task.name}} <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
-            </div>
-            <div>
-            </div>
-        </div>
+        <button type="button" class="btn btn-success addATask" ng-click="openAddTask()">Add a Task</button>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Task</th>
+                    <th>Deadline</th>
+                    <th>Priority</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in goal.tasks track by $index">
+                    <td ng-hide="tempTask">{{task.date | date : 'shortDate'}}</td>
+                    <td ng-hide="tempTask">{{task.name}}</td>
+                    <td ng-hide="tempTask">{{task.deadline | date:'shortDate'}}</td>
+                    <td ng-hide="tempTask">{{task.priority}}</td>
+                     <td ng-hide="tempTask">
+                        <button type="button" ng-click="editTask($index)">Edit</button>
+                    </td>
+                    <td ng-hide="tempTask">
+                        <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
+                    </td>
+                    <td ng-show="tempTask">{{task.date | date : 'shortDate'}}</td>
+                        <td ng-show="tempTask">
+                            <input type="text" ng-model="task.name">
+                        </td>
+                        <td ng-show="tempTask">
+                            <input type="text" ng-model="task.deadline"> </td>
+                        <td ng-show="tempTask"> <input type="text" ng-model="task.priority"></td>
+                        <td ng-show="tempTask">
+                            <button type="button" ng-click="updateTask(goal, task, $index)">Update</button>
+                            <button type="button" ng-click="cancelEdit($index)">Cancel</button>
+                        </td>
+                        <td ng-show="tempTask">
+                            <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+        </section>

@@ -4,17 +4,17 @@ var Goal = require("../models/goalModel");
 
 
 var handler = function(res, next) {
-        return function(err, response) {
-            if (err) {
-                return next(err);
-            }
-            res.send(response);
+    return function(err, response) {
+        if (err) {
+            return next(err);
         }
+        res.send(response);
     }
-    //Get goals
+}
+//Get goals
 
 router.get('/', function(req, res, next) {
-    Goal.find({user: req.user._id},handler(res, next));
+    Goal.find({ user: req.user._id }, handler(res, next));
 })
 
 
@@ -53,6 +53,24 @@ router.post('/:goalId/tasks', function(req, res, next) {
     var goalId = req.params.goalId;
     Goal.findByIdAndUpdate(goalId, { $push: { tasks: req.body } }, { new: true }, handler(res, next))
 });
+
+//update task
+
+router.put("/:goalId/tasks/:taskId", function(req, res, next) {
+    var goalId = req.params.goalId;
+    var taskId = req.params.taskId;
+
+    Goal.findById(goalId, function(err, goal){
+        for(var i=0;i<goal.tasks.length;i++){
+            if(goal.tasks[i].id== taskId){
+                goal.tasks[i]=req.body
+            }
+        }
+     
+
+    goal.save(handler(res, next))
+    });
+})
 
 //delete task
 

@@ -15,7 +15,7 @@
                     <th>Category</th>
                     <th>Tasks</th>
                     <th>Priority</th>
-                    <th>Completed</th>
+                 <!--    <th>Completed</th> -->
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -28,9 +28,7 @@
                     <td ng-hide="tempGoal">{{goal.category}}</td>
                     <td ng-hide="tempGoal"><a ui-sref="goal({id: goal._id, goalParam: goal})">Tasks</a></td>
                     <td ng-hide="tempGoal">{{goal.priority}}</td>
-                    <td ng-hide="tempGoal">
-                        <input type="checkbox">
-                    </td>
+             
                     <td ng-hide="tempGoal">
                         <button type="button" ng-click="editGoal($index)">Edit</button>
                     </td>
@@ -46,9 +44,7 @@
                     <td ng-show="tempGoal">
                         <input type="text" ng-model="goal.category"> </td>
                     <td ng-show="tempGoal">{{goal.priority}}</td>
-                    <td ng-show="tempGoal">
-                        <input type="checkbox">
-                    </td>
+                 
                     <td ng-show="tempGoal">
                         <button type="button" ng-click="updateGoal($index)">Update</button>
                         <button type="button" ng-click="cancelEdit($index)">Cancel</button>

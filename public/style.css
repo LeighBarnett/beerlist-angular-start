@@ -8,9 +8,35 @@
 
 .closeModal {
 	float:right;
-	padding:20px;
+	/*padding:20px;
 	background-color: white;
-	border:none;
+	border:none;*/
 }
+
+.nameAndDeadline {
+	display: inline-block;
+	width: 400px;
+}
+
+
+#category, #priority {
+	display: inline-block;
+	width: 49%;
+}
+
+#priority{
+	float:right;
+}
+
+#calendar {
+	height: 34px;
+}
+
+p{
+	display: inline-block;
+	width: 145px;
+	float:right;
+}
+
 
 

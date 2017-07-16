@@ -11,13 +11,13 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
             templateUrl: '../templates/addGoalTemplate.html',
             controller: function($scope, $uibModalInstance) {
 
-                $scope.newGoal = { date: new Date(), user: authFactory.currentUser.id};
+                $scope.newGoal = { date: new Date(), user: authFactory.currentUser.id };
 
                 $scope.clear = function() {
                     $scope.newGoal.deadline = null;
                 };
 
-               
+
 
                 $scope.dateOptions = {
 
@@ -37,8 +37,8 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
                     opened: false
                 };
 
-       
-             
+
+
 
                 $scope.addGoal = function(newGoal) {
                     goalFactory.addGoal(newGoal)
@@ -48,7 +48,7 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
                         })
                 };
 
- 
+
 
                 $scope.closeAddGoal = function() {
                     $uibModalInstance.dismiss()
@@ -119,4 +119,8 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
         .catch(function(error) {
             console.log(error)
         });
+
+
+
+    
 })

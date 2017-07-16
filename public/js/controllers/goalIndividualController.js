@@ -1,4 +1,4 @@
-app.controller('goalIndividualController', function($uibModal, $scope, goalFactory, $stateParams) {
+app.controller('goalIndividualController', function($uibModal, $scope, goalFactory, authFactory, $stateParams) {
 
     if (!$stateParams.goalParam) {
         var goalId = $stateParams.id
@@ -10,18 +10,100 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
         $scope.goal = $stateParams.goalParam;
     }
 
-    $scope.addTask = function(newTask, goalId) {
-        newTask.date = new Date()
-        goalFactory.addTask(newTask, goalId)
-            .then(function(response) {
+    $scope.openAddTask = function() {
+        $uibModal.open({
+            scope: $scope,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: '../templates/addTaskTemplate.html',
+            controller: function($scope, $uibModalInstance) {
 
-                $scope.goal = response.data
-            })
+                $scope.newTask = { date: new Date(), user: authFactory.currentUser.id };
 
-        .catch(function(error) {
+                $scope.clear = function() {
+                    $scope.newTask.deadline = null;
+                };
+
+
+
+                $scope.dateOptions = {
+
+                    maxDate: new Date(2020, 5, 22),
+                    minDate: new Date(),
+                    startingDay: 0
+                };
+                $scope.open2 = function() {
+                    $scope.popup2.opened = true;
+                };
+
+
+
+                $scope.format = 'dd-MMM-yyyy';
+
+                $scope.popup2 = {
+                    opened: false
+                };
+
+
+
+                $scope.addTask = function(newTask, goalId) {
+                    newTask.date = new Date()
+                    goalFactory.addTask(newTask, goalId)
+                        .then(function(response) {
+
+                            $scope.goal.tasks = response.data.tasks
+                            console.log($scope.goal.tasks)
+
+                            $uibModalInstance.close($scope.newTask);
+                        })
+
+                        .catch(function(error) {
+                            console.log(error)
+                        });
+                }
+
+                $scope.closeAddTask = function() {
+                    $uibModalInstance.dismiss()
+                }
+
+
+
+            }
+        }).result.catch(function(error) {
             console.log(error)
         });
+
     }
+
+    $scope.editTask = function(index) {
+
+        this.tempTask = angular.copy($scope.goal.tasks[index]);
+
+    }
+
+    $scope.cancelEdit = function(index) {
+        //copy the tempBeer over the top of the current beer
+        $scope.goal.tasks[index] = angular.copy(this.tempTask);
+        //turn off edit view
+        this.tempTask = null;
+    };
+
+    $scope.updateTask = function(goal, task, index) {
+        var goalId= goal._id
+        console.log(goal)
+        var taskId = task._id
+        //save a copy of the tempBeer in case something goes wrong
+        var tempTask = angular.copy(this.tempTask);
+        //turn off edit view as we are assuming all will be OK
+        this.tempTask = null;
+        //...then send request as we're optimistic
+        goalFactory.updateTask(goalId, taskId, $scope.goal.tasks[index])
+            //only if the update goes wrong are we going to do something
+            .catch(function(err) {
+                alert(err.data.message);
+                $scope.goal.tasks[index] = angular.copy(tempTask)
+            })
+    };
 
     $scope.deleteTask = function(task, goalId) {
         var taskId = task._id
