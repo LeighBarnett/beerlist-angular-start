@@ -11,6 +11,14 @@ app.factory('goalFactory', function($http) {
                 });
     };
 
+
+    goalFactory.completed=function(goal){
+        return $http.put('/goals/' + goal._id, goal)
+            .then(function(response) {
+                return response.data
+            });
+    }
+
     goalFactory.addGoal = function(newGoal) {
         return $http.post('/goals', newGoal)
             .then(function(response) {

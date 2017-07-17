@@ -1,42 +1,125 @@
+    body {
+
+    background-image: url("sky.jpg");
+    background-size: cover;
+}
+
+.navbar-custom {
+    background-color: #1A6899;
+    height: 70px;
+    border: none;
+    font-color: white;
+    border-radius: 0;
+}
+
+.navbar.navbar-custom .navbar-brand {
+    color: white;
+    font-family: 'Fugaz One', cursive;
+    font-size: 40px;
+    padding: 25px;
+}
+
+.navbar.navbar-custom .dropdown,
+.navbar.navbar-custom .dropdown:active,
+.navbar.navbar-custom .dropdown:focus,
+.navbar.navbar-custom .dropdown:hover {
+	height:100%;
+	font-size: 20px;
+	padding-top: 12px;
+	color: white;
+	font-weight: bold;
+}
+
+
+/***Dropdown Background Active State***/
+
+.navbar.navbar-custom .nav li.dropdown.open > .dropdown-toggle,
+.navbar.navbar-custom .nav li.dropdown.active > .dropdown-toggle,
+.navbar.navbar-custom .nav li.dropdown.open.active > .dropdown-toggle {
+  
+  background: #1a6899;
+  color: white;
+}
+
+
+
+th {
+    background-color: #1a6899;
+    color: white;
+}
+
+tr {
+    background-color: #e9f4fb;
+}
+
+.table tbody tr:hover td,
+.table tbody tr:hover {
+    background-color: #d3eaf8;
+}
+
+tbody {
+    border: 1px solid #F7F7F9;
+}
+
+
+
 .addAGoal {
-    margin: 10px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: 14px;
 }
 
 .addGoalForm {
     padding: 20px;
 }
 
+.completedGoal {
+    background-color:   #c2e2b6;
+}
+
+
+.table tbody .completedGoal:hover td {
+    background-color:  #a4d491
+;
+}
+
+input[type=checkbox] {
+  transform: scale(2);
+}
+
+.move {
+    padding-left: 30px;
+    padding-top: 5px;
+}
 .closeModal {
-	float:right;
-	/*padding:20px;
+    float: right;}
+    /*padding:20px;
 	background-color: white;
-	border:none;*/
+	border:none;
 }
 
 .nameAndDeadline {
-	display: inline-block;
-	width: 400px;
+    display: inline-block;
+    width: 400px;
 }
 
 
-#category, #priority {
-	display: inline-block;
-	width: 49%;
+#category,
+#priority {
+    display: inline-block;
+    width: 49%;
 }
 
-#priority{
-	float:right;
+#priority {
+    float: right;
 }
 
 #calendar {
-	height: 34px;
+    height: 34px;
 }
 
-p{
-	display: inline-block;
-	width: 145px;
-	float:right;
+p {
+    display: inline-block;
+    width: 145px;
+    float: right;
 }
-
-
-

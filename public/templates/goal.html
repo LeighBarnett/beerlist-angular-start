@@ -4,13 +4,14 @@
     <h2>Deadline: {{goal.deadline | date:'shortDate'}}</h2>
     <div>
         <button type="button" class="btn btn-success addATask" ng-click="openAddTask()">Add a Task</button>
-        <table class="table table-hover">
+        <div class="page-header"></div>
             <thead>
                 <tr>
                     <th>Date</th>
                     <th>Task</th>
                     <th>Deadline</th>
                     <th>Priority</th>
+                    <th>Completed</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -21,26 +22,34 @@
                     <td ng-hide="tempTask">{{task.name}}</td>
                     <td ng-hide="tempTask">{{task.deadline | date:'shortDate'}}</td>
                     <td ng-hide="tempTask">{{task.priority}}</td>
-                     <td ng-hide="tempTask">
-                        <button type="button" ng-click="editTask($index)">Edit</button>
+                    <td ng-hide="tempTask">
+                        Completed
+                    </td>
+                    <td ng-hide="tempTask">
+                        <button type="button" ng-click="editTask($index)"></button>
                     </td>
                     <td ng-hide="tempTask">
                         <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
                     </td>
                     <td ng-show="tempTask">{{task.date | date : 'shortDate'}}</td>
-                        <td ng-show="tempTask">
-                            <input type="text" ng-model="task.name">
-                        </td>
-                        <td ng-show="tempTask">
-                            <input type="text" ng-model="task.deadline"> </td>
-                        <td ng-show="tempTask"> <input type="text" ng-model="task.priority"></td>
-                        <td ng-show="tempTask">
-                            <button type="button" ng-click="updateTask(goal, task, $index)">Update</button>
-                            <button type="button" ng-click="cancelEdit($index)">Cancel</button>
-                        </td>
-                        <td ng-show="tempTask">
-                            <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
-                        </td>
+                    <td ng-show="tempTask">
+                        <input type="text" ng-model="task.name">
+                    </td>
+                    <td ng-show="tempTask">
+                        <input type="text" ng-model="task.deadline"> </td>
+                    <td ng-show="tempTask">
+                        <input type="text" ng-model="task.priority">
+                    </td>
+                    <td ng-show="tempTask">
+                        Completed
+                    </td>
+                    <td ng-show="tempTask">
+                        <button type="button" ng-click="updateTask(goal, task, $index)">Update</button>
+                        <button type="button" ng-click="cancelEdit($index)">Cancel</button>
+                    </td>
+                    <td ng-show="tempTask">
+                        <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-danger">Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

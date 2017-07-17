@@ -16,6 +16,7 @@ var goalSchema = new Schema({
     name: { type: String },
     deadline: { type: String },
     category: { type: String },
+    complete: {type: Boolean},
     image_url: { type: String },
     priority: { type: String },
     urgency: { type: String },

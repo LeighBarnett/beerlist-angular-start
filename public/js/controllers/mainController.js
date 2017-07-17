@@ -63,6 +63,12 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
 
     }
 
+    $scope.completed = function() {
+        goalFactory.completed(this.goal)
+            .then(function(response) {
+                $scope.goals[this.$index] = response
+            })
+    }
 
 
 
@@ -113,6 +119,9 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
             });
     }
 
+
+
+
     goalFactory.getGoals().then(function(goals) {
             $scope.goals = goals;
         })
@@ -122,5 +131,5 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
 
 
 
-    
+
 })

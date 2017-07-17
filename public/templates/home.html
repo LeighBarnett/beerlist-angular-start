@@ -1,59 +1,61 @@
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <h1 class="text-center">Goalist</h1>
-        <div class="page-header"></div>
+<section>
+    <button type="button" class="btn btn-info btn-lg addAGoal" ng-click="openAddGoal()">ADD A GOAL</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Goal</th>
+                <th>Deadline</th>
+                <th>Category</th>
+                <th>Tasks</th>
+                <th>Priority</th>
+                <th>Completed</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="goal in goals track by $index" ng-class="{completedGoal:goal.complete}">
+                <td ng-hide="tempGoal">{{goal.date | date : 'shortDate'}}</td>
+                <td ng-hide="tempGoal">{{goal.name}}</td>
+                <td ng-hide="tempGoal">{{goal.deadline | date:'shortDate'}}</td>
+                <td ng-hide="tempGoal">{{goal.category}}</td>
+                <td ng-hide="tempGoal">
+                    <button type="button" class="btn btn-info" ui-sref="goal({id: goal._id, goalParam: goal})">Tasks</button>
+                </td>
+                <td ng-hide="tempGoal">{{goal.priority}}</td>
+                <td ng-hide="tempGoal">
+                    <div class="move">
+                        <input type="checkbox" ng-click="completed()" ng-checked="{{goal.complete}}" ng-model="goal.complete"  uib-btn-checkbox/> 
+                    </div>
+                </td>
+                <td ng-hide="tempGoal">
+                    <button type="button" class="btn btn-default" ng-click="editGoal($index)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                </td>
+                <td ng-hide="tempGoal">
+                    <button type="button" class="btn btn-default" ng-click="removeGoal(goal)"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                </td>
+                <td ng-show="tempGoal">{{goal.date}}</td>
+                <td ng-show="tempGoal">
+                    <input type="text" ng-model="goal.name">
+                </td>
+                <td ng-show="tempGoal">
+                    <input type="text" ng-model="goal.deadline"> </td>
+                <td ng-show="tempGoal">
+                    <input type="text" ng-model="goal.category"> </td>
+                <td ng-show="tempGoal">{{goal.priority}}</td>
+                <td ng-show="tempGoal">
+                    Completed
+                </td>
+                <td ng-show="tempGoal">
+                    <button type="button" ng-click="updateGoal($index)">Update</button>
+                    <button type="button" ng-click="cancelEdit($index)">Cancel</button>
+                </td>
+                <td ng-show="tempGoal">
+                    <button type="button" ng-click="removeGoal(goal)"> X </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     </div>
-</div>
-    <section>
-        <button type="button" class="btn btn-success addAGoal" ng-click="openAddGoal()">Add a Goal</button>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Goal</th>
-                    <th>Deadline</th>
-                    <th>Category</th>
-                    <th>Tasks</th>
-                    <th>Priority</th>
-                 <!--    <th>Completed</th> -->
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="goal in goals track by $index">
-                    <td ng-hide="tempGoal">{{goal.date | date : 'shortDate'}}</td>
-                    <td ng-hide="tempGoal">{{goal.name}}</td>
-                    <td ng-hide="tempGoal">{{goal.deadline | date:'shortDate'}}</td>
-                    <td ng-hide="tempGoal">{{goal.category}}</td>
-                    <td ng-hide="tempGoal"><a ui-sref="goal({id: goal._id, goalParam: goal})">Tasks</a></td>
-                    <td ng-hide="tempGoal">{{goal.priority}}</td>
-             
-                    <td ng-hide="tempGoal">
-                        <button type="button" ng-click="editGoal($index)">Edit</button>
-                    </td>
-                    <td ng-hide="tempGoal">
-                        <button type="button" ng-click="removeGoal(goal)"> X </button>
-                    </td>
-                    <td ng-show="tempGoal">{{goal.date}}</td>
-                    <td ng-show="tempGoal">
-                        <input type="text" ng-model="goal.name">
-                    </td>
-                    <td ng-show="tempGoal">
-                        <input type="text" ng-model="goal.deadline"> </td>
-                    <td ng-show="tempGoal">
-                        <input type="text" ng-model="goal.category"> </td>
-                    <td ng-show="tempGoal">{{goal.priority}}</td>
-                 
-                    <td ng-show="tempGoal">
-                        <button type="button" ng-click="updateGoal($index)">Update</button>
-                        <button type="button" ng-click="cancelEdit($index)">Cancel</button>
-                    </td>
-                    <td ng-show="tempGoal">
-                        <button type="button" ng-click="removeGoal(goal)"> X </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</div>
 </section>
