@@ -3,8 +3,9 @@
         background-image: url("sky.jpg");
         background-size: cover;
         font-family: 'Lato', sans-serif;
-/*        font-family: 'Roboto', sans-serif;
-*/    }
+        /*        font-family: 'Roboto', sans-serif;
+*/
+    }
 
     .navbar-custom {
         background-color: #1A6899;
@@ -60,8 +61,7 @@
 
     tbody {
         border: 1px solid #F7F7F9;
-                text-align: center;
-
+        text-align: center;
     }
 
 
@@ -73,7 +73,8 @@
         font-size: 14px;
     }
 
-    .addGoalForm {
+    .addGoalForm,
+    .addTaskForm {
         padding: 20px;
     }
 
@@ -104,40 +105,40 @@
         height: 34px;
     }
 
-.updateButton {
-    margin-bottom: 3px;
-}
+    .updateButton {
+        margin-bottom: 3px;
+    }
 
     .closeModal {
         float: right;
     }
-    /*padding:20px;
-    background-color: white;
-    border:none;
-}
-
-.nameAndDeadline {
-    display: inline-block;
-    width: 400px;
-}
 
 
-#category,
-#priority {
-    display: inline-block;
-    width: 49%;
-}
+    .nameAndDeadline {
+        display: inline-block;
+        width: 400px;
+    }
 
-#priority {
-    float: right;
-}
 
-#calendar {
-    height: 34px;
-}
+    #category,
+    #priority {
+        display: inline-block;
+        width: 49%;
+    }
 
-p {
-    display: inline-block;
-    width: 145px;
-    float: right;
-}
+    #priority {
+        float: right;
+    }
+
+
+
+    p {
+        display: inline-block;
+        width: 145px;
+        float: right;
+    }
+
+    .addTaskDeadline{
+        display: block;
+      
+    }

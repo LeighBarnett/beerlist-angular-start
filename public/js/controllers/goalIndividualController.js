@@ -75,6 +75,26 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
 
     }
 
+
+     $scope.dateOptions = {
+
+                    maxDate: new Date(2020, 5, 22),
+                    minDate: new Date(),
+                    startingDay: 0
+                };
+                $scope.open4 = function() {
+                    $scope.popup4.opened = true;
+                };
+
+
+
+                $scope.format = 'dd-MMM-yyyy';
+
+                $scope.popup4 = {
+                    opened: false
+                };
+
+
     $scope.editTask = function(index) {
 
         this.tempTask = angular.copy($scope.goal.tasks[index]);

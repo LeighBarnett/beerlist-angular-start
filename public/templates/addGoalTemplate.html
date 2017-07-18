@@ -1,11 +1,11 @@
 <form ng-submit="addGoal()" class="addGoalForm">
-     <button type="button" ng-click="closeAddGoal()" class="closeModal">x</button>
-    <h3>Add a new goal    
+     <button type="button" ng-click="closeAddGoal()" class="btn btn-default closeModal"><i class="fa fa-times" aria-hidden="true"></i></button>
+    <h3 class="header">Add a New Goal    
  </h3>
     <div class="form-group nameAndDeadline">
         <input type="text" class="form-control" placeholder="Goal" ng-model="newGoal.name"></input>
     </div>
-        <p class="input-group" >
+        <p class="input-group">
             <input type="text"  placeholder="Deadline" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="newGoal.deadline" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open1()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}"/>
           <span class="input-group-btn" >
             <button type="button" class="btn btn-default" id="calendar" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>

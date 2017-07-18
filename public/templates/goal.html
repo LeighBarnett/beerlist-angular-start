@@ -1,8 +1,7 @@
 <div class="page-header">
     <h1 class="header">{{goal.name}} <small> Deadline: {{goal.deadline | date:'shortDate'}}</small></h1>
-    
     <div>
-        <button type="button" class="btn btn-primary addATask" ui-sref="home" >BACK TO GOALS</button>
+        <button type="button" class="btn btn-primary addATask" ui-sref="home">BACK TO GOALS</button>
         <button type="button" class="btn btn-info addATask" ng-click="openAddTask()">ADD A TASK</button>
         <table class="table table-hover">
             <thead>
@@ -24,12 +23,12 @@
                     <td ng-hide="tempTask">{{task.priority}}</td>
                     <td ng-hide="tempTask">
                         <div class="move">
-                        <input type="checkbox"/> 
-                    </div>
+                            <input type="checkbox" />
+                        </div>
                     </td>
                     <td ng-hide="tempTask">
                         <button type="button" class="btn btn-default" ng-click="editTask($index)">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </button>
                     </td>
                     <td ng-hide="tempTask">
@@ -40,19 +39,25 @@
                         <input type="text" class="form-control" ng-model="task.name">
                     </td>
                     <td ng-show="tempTask">
-                        <input type="text"  class="form-control" ng-model="task.deadline"> </td>
-                    <td ng-show="tempTask">
-                        <input type="text" class="form-control" ng-model="task.priority">
-                    </td>
-                    <td ng-show="tempTask">
-                    </td>
-                    <td ng-show="tempTask">
-                        <button type="button" class="btn btn-success" ng-click="updateTask(goal, task, $index)"><i class="fa fa-check" aria-hidden="true"></i></button>
-                        <button type="button"  class="btn btn-danger" ng-click="cancelEdit($index)"><i class="fa fa-ban" aria-hidden="true"></i></button>
-                    </td>
-                    <td ng-show="tempTask">
-                        <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
-                    </td>
+                        <p class="input-group">
+                            <input type="text" placeholder="{{task.deadline | date:'shortDate'}}" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="task.deadline" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open4()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
+                            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" id="calendar" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                        </p>
+                        <!-- <input type="text"  class="form-control" ng-model="task.deadline"> </td> -->
+                        <td ng-show="tempTask">
+                            <input type="text" class="form-control" ng-model="task.priority">
+                        </td>
+                        <td ng-show="tempTask">
+                        </td>
+                        <td ng-show="tempTask">
+                            <button type="button" class="btn btn-success" ng-click="updateTask(goal, task, $index)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger" ng-click="cancelEdit($index)"><i class="fa fa-ban" aria-hidden="true"></i></button>
+                        </td>
+                        <td ng-show="tempTask">
+                            <button type="button" ng-click="deleteTask(task, goal._id)" class="btn btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                        </td>
                 </tr>
             </tbody>
         </table>

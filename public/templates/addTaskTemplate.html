@@ -1,18 +1,18 @@
 <form ng-submit="addTask()" class="addTaskForm">
-    <button type="button" ng-click="closeAddTask()" class="closeModal">x</button>
-    <h3>Add a new task  </h3>
-    <div class="form-group">
+    <button type="button" ng-click="closeAddTask()" class="btn btn-default closeModal"><i class="fa fa-times" aria-hidden="true"></i></button>
+    <h3 class="header">Add a new task  </h3>
+    <div class="form-group nameAndDeadline">
         <input type="text" class="form-control" placeholder="Task" ng-model="newTask.name"></input>
     </div>
-    <p class="input-group">
+    <p class="input-group" >
         <input type="text" placeholder="Deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="newTask.deadline" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open2()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
         <span class="input-group-btn">
             <button type="button" class="btn btn-default" id="calendar" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
     </p>
-    <div class="form-group">
-        <label for="sel1">Priority</label>
+    <div class="form-group" >
         <select class="form-control" ng-model="newTask.priority">
+            <option value= "" selected hidden>Priority</option>
             <option value: "Low">Low</option>
             <option value: "Medium">Medium</option>
             <option value: "High">High</option>
