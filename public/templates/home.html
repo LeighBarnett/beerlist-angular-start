@@ -26,7 +26,7 @@
                 <td ng-hide="tempGoal">{{goal.priority}}</td>
                 <td ng-hide="tempGoal">
                     <div class="move">
-                        <input type="checkbox" ng-click="completed()" ng-checked="{{goal.complete}}" ng-model="goal.complete"  uib-btn-checkbox/> 
+                        <input type="checkbox" ng-click="completed()" ng-checked="{{goal.complete}}" ng-model="goal.complete" uib-btn-checkbox/>
                     </div>
                 </td>
                 <td ng-hide="tempGoal">
@@ -35,24 +35,33 @@
                 <td ng-hide="tempGoal">
                     <button type="button" class="btn btn-default" ng-click="removeGoal(goal)"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button>
                 </td>
-                <td ng-show="tempGoal">{{goal.date}}</td>
+                <td ng-show="tempGoal">{{goal.date | date : 'shortDate'}}</td>
                 <td ng-show="tempGoal">
-                    <input type="text" ng-model="goal.name">
+                    <input type="text" class="form-control" ng-model="goal.name">
                 </td>
                 <td ng-show="tempGoal">
-                    <input type="text" ng-model="goal.deadline"> </td>
-                <td ng-show="tempGoal">
-                    <input type="text" ng-model="goal.category"> </td>
-                <td ng-show="tempGoal">{{goal.priority}}</td>
-                <td ng-show="tempGoal">
-                    Completed
+                    <p class="input-group">
+                        <input type="text" placeholder="{{goal.deadline | date:'shortDate'}}" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="goal.deadline" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open3()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
+                        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" id="calendar" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                    </p>
                 </td>
                 <td ng-show="tempGoal">
-                    <button type="button" ng-click="updateGoal($index)">Update</button>
-                    <button type="button" ng-click="cancelEdit($index)">Cancel</button>
+                    <input type="text" class="form-control" ng-model="goal.category"> </td>
+                <td ng-show="tempGoal"></td>
+                <td ng-show="tempGoal">
+                    <input type="text" class="form-control" ng-model="goal.priority">
                 </td>
                 <td ng-show="tempGoal">
-                    <button type="button" ng-click="removeGoal(goal)"> X </button>
+                </td>
+                <td ng-show="tempGoal">
+                    <button type="button" class="btn btn-success updateButton" ng-click="updateGoal($index)"><i class="fa fa-check" aria-hidden="true"></i>
+</button>
+                    <button type="button" class="btn btn-danger" ng-click="cancelEdit($index)"><i class="fa fa-ban" aria-hidden="true"></i></button>
+                </td>
+                <td ng-show="tempGoal">
+                     <button type="button" class="btn btn-default" ng-click="removeGoal(goal)"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button>
                 </td>
             </tr>
         </tbody>

@@ -11,6 +11,7 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.2",
+    "angular-datetime-input": "^5.1.2",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "express": "^4.15.3",

@@ -1,4 +1,4 @@
-var app = angular.module('goalist', ['ui.bootstrap', 'ui.router']);
+var app = angular.module('goalist', ['ui.bootstrap', 'ui.router', 'datetime']);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);

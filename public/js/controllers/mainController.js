@@ -1,6 +1,5 @@
 app.controller('goalController', function($uibModal, $scope, goalFactory, authFactory) {
 
-
     $scope.goals = [];
 
     $scope.openAddGoal = function() {
@@ -75,6 +74,26 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
     $scope.editGoal = function(index) {
 
         this.tempGoal = angular.copy($scope.goals[index]);
+
+                   $scope.dateOptions = {
+
+                    maxDate: new Date(2020, 5, 22),
+                    minDate: new Date(),
+                    startingDay: 0
+                };
+                $scope.open3 = function() {
+                    $scope.popup3.opened = true;
+                };
+
+
+
+                $scope.format = 'dd-MMM-yyyy';
+
+                $scope.popup3 = {
+                    opened: false
+                };
+
+    
 
     }
 
