@@ -4,19 +4,21 @@ var Schema = mongoose.Schema
 
 var taskSchema = new Schema({
     name: { type: String },
-    deadline: { type: String },
+    deadline: Date,
     priority: { type: String },
     urgency: { type: String },
     percentageCompleted: { type: Number },
     date: Date,
-    comment: { type: String }
+    comment: { type: String },
+    complete: { type: Boolean }
+
 })
 
 var goalSchema = new Schema({
     name: { type: String },
-    deadline: { type: String },
+    deadline: Date,
     category: { type: String },
-    complete: {type: Boolean},
+    complete: { type: Boolean },
     image_url: { type: String },
     priority: { type: String },
     urgency: { type: String },
@@ -25,7 +27,7 @@ var goalSchema = new Schema({
     percentageCompleted: { type: Number },
     date: Date,
     tasks: [taskSchema],
-    user: {type: Schema.Types.ObjectId, ref: 'user' }
+    user: { type: Schema.Types.ObjectId, ref: 'user' }
 })
 var Goal = mongoose.model('goal', goalSchema)
 

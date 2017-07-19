@@ -19,6 +19,14 @@ app.factory('goalFactory', function($http) {
             });
     }
 
+  goalFactory.completedTask=function(goalId, taskId, task){
+        return $http.put('/goals/' + goalId + '/tasks/' + taskId, task)
+            .then(function(response) {
+                return response.data
+            });
+    }
+
+
     goalFactory.addGoal = function(newGoal) {
         return $http.post('/goals', newGoal)
             .then(function(response) {

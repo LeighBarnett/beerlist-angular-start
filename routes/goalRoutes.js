@@ -8,7 +8,7 @@ var handler = function(res, next) {
         if (err) {
             return next(err);
         }
-        res.send(response);
+        res.json(response);
     }
 }
 //Get goals

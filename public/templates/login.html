@@ -1,5 +1,7 @@
-<form ng-submit="login()">
-    <h3>Log In</h3>
+<div class="loginDiv">
+
+<form ng-submit="login()" class="loginSize">
+    <h3 class="loginTitle">Log In</h3>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
     </div>
@@ -9,3 +11,6 @@
     <button type="submit" class="btn btn-primary">Log In</button>
     <button type="button" ui-sref="register" class="btn btn-default">Register</button>
 </form>
+</div>
+<div>
+

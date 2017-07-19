@@ -40,8 +40,8 @@
                     <input type="text" class="form-control" ng-model="goal.name">
                 </td>
                 <td ng-show="tempGoal">
-                    <p class="input-group">
-                        <input type="text" placeholder="{{goal.deadline | date:'shortDate'}}" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="goal.deadline" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open3()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
+                    <p class="input-group" >
+                        <input type="text" data-datepicker-popup show-button-bar="false" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="goal.deadline" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="goal.deadline" close-text="Close" ng-click="open3()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
                         <span class="input-group-btn">
             <button type="button" class="btn btn-default" id="calendar" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>

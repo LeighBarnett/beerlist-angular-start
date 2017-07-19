@@ -1,6 +1,7 @@
-app.controller('goalController', function($uibModal, $scope, goalFactory, authFactory) {
+app.controller('goalController', function(uibDateParser, $uibModal, $scope, goalFactory, authFactory) {
 
     $scope.goals = [];
+    $scope.format = 'dd-MMM-yyyy';
 
     $scope.openAddGoal = function() {
         $uibModal.open({
@@ -12,9 +13,6 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
 
                 $scope.newGoal = { date: new Date(), user: authFactory.currentUser.id };
 
-                $scope.clear = function() {
-                    $scope.newGoal.deadline = null;
-                };
 
 
 
@@ -30,30 +28,35 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
 
 
 
-                $scope.format = 'dd-MMM-yyyy';
-
                 $scope.popup1 = {
                     opened: false
                 };
 
 
-
-
                 $scope.addGoal = function(newGoal) {
-                    goalFactory.addGoal(newGoal)
-                        .then(function(newGoalData) {
-                            $scope.goals.push(newGoalData);
-                            $uibModalInstance.close($scope.newGoal);
-                        })
+                    if (newGoal.deadline == null) {
+                        this.deadLineIncorrect = true;
+                    } else {
+                        this.deadLineIncorrect = false;
+
+                        goalFactory.addGoal(newGoal)
+
+                            .then(function(newGoalData) {
+                                newGoalData.deadline = new Date(newGoalData.deadline)
+                                // if (isNaN(newGoalData.deadline.getTime())) {
+                                //     delete newGoalData.deadline;
+                                // }
+
+
+                                $scope.goals.push(newGoalData);
+                                $uibModalInstance.close($scope.newGoal);
+                            })
+                    }
                 };
-
-
 
                 $scope.closeAddGoal = function() {
                     $uibModalInstance.dismiss()
                 }
-
-
 
             }
         }).result.catch(function(error) {
@@ -75,25 +78,20 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
 
         this.tempGoal = angular.copy($scope.goals[index]);
 
-                   $scope.dateOptions = {
+        this.dateOptions = {
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 0
+        };
 
-                    maxDate: new Date(2020, 5, 22),
-                    minDate: new Date(),
-                    startingDay: 0
-                };
-                $scope.open3 = function() {
-                    $scope.popup3.opened = true;
-                };
+        this.open3 = function() {
+            this.popup3.opened = true;
+        };
 
 
-
-                $scope.format = 'dd-MMM-yyyy';
-
-                $scope.popup3 = {
-                    opened: false
-                };
-
-    
+        this.popup3 = {
+            opened: false
+        };
 
     }
 
@@ -110,6 +108,7 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
         var tempGoal = angular.copy(this.tempGoal);
         //turn off edit view as we are assuming all will be OK
         this.tempGoal = null;
+
         //...then send request as we're optimistic
         goalFactory.updateGoal($scope.goals[index])
             //only if the update goes wrong are we going to do something
@@ -141,14 +140,32 @@ app.controller('goalController', function($uibModal, $scope, goalFactory, authFa
 
 
 
-    goalFactory.getGoals().then(function(goals) {
-            $scope.goals = goals;
+    goalFactory.getGoals()
+        .then(function(goals) {
+            console.log('goaaals')
+            $scope.goals = goals.map(function(goal, index) {
+                goal.deadline = new Date(goal.deadline)
+
+                goal.tasks.map(function(task, index) {
+
+                    task.deadline = new Date(task.deadline)
+                })
+
+                return goal
+
+
+            })
+
         })
+        // function(goal) {
+        //     $scope.goal = goal.tasks.map(function(task, index) {
+        //         task.deadline = new Date(task.deadline)
+        //     })
+        // })
+
         .catch(function(error) {
             console.log(error)
         });
-
-
 
 
 })

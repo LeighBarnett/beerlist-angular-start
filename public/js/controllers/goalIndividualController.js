@@ -1,10 +1,15 @@
-app.controller('goalIndividualController', function($uibModal, $scope, goalFactory, authFactory, $stateParams) {
+app.controller('goalIndividualController', function(uibDateParser, $uibModal, $scope, goalFactory, authFactory, $stateParams) {
 
     if (!$stateParams.goalParam) {
         var goalId = $stateParams.id
         goalFactory.getIndivGoal(goalId)
             .then(function(goal) {
                 $scope.goal = goal
+
+                goal.tasks.map(function(task, index) {
+
+                    task.deadline = new Date(task.deadline)
+                })
             })
     } else {
         $scope.goal = $stateParams.goalParam;
@@ -20,9 +25,9 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
 
                 $scope.newTask = { date: new Date(), user: authFactory.currentUser.id };
 
-                $scope.clear = function() {
-                    $scope.newTask.deadline = null;
-                };
+                // $scope.clear = function() {
+                //     $scope.newTask.deadline = null;
+                // };
 
 
 
@@ -47,28 +52,36 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
 
 
                 $scope.addTask = function(newTask, goalId) {
-                    newTask.date = new Date()
-                    goalFactory.addTask(newTask, goalId)
-                        .then(function(response) {
+                    if (newTask.deadline == null) {
+                        this.deadLineIncorrect = true;
 
-                            $scope.goal.tasks = response.data.tasks
-                            console.log($scope.goal.tasks)
+                    } else {
 
-                            $uibModalInstance.close($scope.newTask);
-                        })
+                        this.deadLineIncorrect = false;
 
-                        .catch(function(error) {
-                            console.log(error)
-                        });
-                }
+                        goalFactory.addTask(newTask, goalId)
+
+                            .then(function(response) {
+                                $scope.goal.tasks = response.data.tasks.map(function(task, index) {
+                                    task.deadline = new Date(task.deadline)
+                                    return task
+                                });
+
+                                console.log($scope.goal)
+                                $uibModalInstance.close($scope.newTask);
+                            })
+
+
+                    }
+                };
 
                 $scope.closeAddTask = function() {
                     $uibModalInstance.dismiss()
                 }
-
-
-
             }
+
+
+
         }).result.catch(function(error) {
             console.log(error)
         });
@@ -76,23 +89,23 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
     }
 
 
-     $scope.dateOptions = {
+    $scope.dateOptions = {
 
-                    maxDate: new Date(2020, 5, 22),
-                    minDate: new Date(),
-                    startingDay: 0
-                };
-                $scope.open4 = function() {
-                    $scope.popup4.opened = true;
-                };
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 0
+    };
+    $scope.open4 = function() {
+        $scope.popup4.opened = true;
+    };
 
 
 
-                $scope.format = 'dd-MMM-yyyy';
+    $scope.format = 'dd-MMM-yyyy';
 
-                $scope.popup4 = {
-                    opened: false
-                };
+    $scope.popup4 = {
+        opened: false
+    };
 
 
     $scope.editTask = function(index) {
@@ -109,7 +122,7 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
     };
 
     $scope.updateTask = function(goal, task, index) {
-        var goalId= goal._id
+        var goalId = goal._id
         console.log(goal)
         var taskId = task._id
         //save a copy of the tempBeer in case something goes wrong
@@ -124,6 +137,17 @@ app.controller('goalIndividualController', function($uibModal, $scope, goalFacto
                 $scope.goal.tasks[index] = angular.copy(tempTask)
             })
     };
+
+
+    $scope.completedTask = function(goal, task, index) {
+       var goalId = goal._id
+        var taskId = task._id
+        goalFactory.completedTask(goalId, taskId, $scope.goal.tasks[index])
+            .then(function(response) {
+                console.log(response)
+                $scope.goal.tasks[this.$index] = response
+            })
+    }
 
     $scope.deleteTask = function(task, goalId) {
         var taskId = task._id

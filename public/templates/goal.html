@@ -16,14 +16,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="task in goal.tasks track by $index">
+                <tr ng-repeat="task in goal.tasks track by $index" ng-class="{completedTask:task.complete}">
                     <td ng-hide="tempTask">{{task.date | date : 'shortDate'}}</td>
                     <td ng-hide="tempTask">{{task.name}}</td>
                     <td ng-hide="tempTask">{{task.deadline | date:'shortDate'}}</td>
                     <td ng-hide="tempTask">{{task.priority}}</td>
                     <td ng-hide="tempTask">
                         <div class="move">
-                            <input type="checkbox" />
+<!--                             <input type="checkbox" />
+ -->
+                        <input type="checkbox" ng-click="completedTask(goal, task, $index)" ng-checked="{{task.complete}}" ng-model="task.complete" uib-btn-checkbox/>
+                 
                         </div>
                     </td>
                     <td ng-hide="tempTask">
@@ -40,7 +43,7 @@
                     </td>
                     <td ng-show="tempTask">
                         <p class="input-group">
-                            <input type="text" placeholder="{{task.deadline | date:'shortDate'}}" id="deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="task.deadline" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open4()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
+                            <input type="text" data-datepicker-popup show-button-bar="false" id="deadline" class="form-control " uib-datepicker-popup="dd-MMM-yyyy" ng-model="task.deadline" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open4()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
                             <span class="input-group-btn">
             <button type="button" class="btn btn-default" id="calendar" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>

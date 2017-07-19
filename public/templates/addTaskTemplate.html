@@ -5,7 +5,7 @@
         <input type="text" class="form-control" placeholder="Task" ng-model="newTask.name"></input>
     </div>
     <p class="input-group" >
-        <input type="text" placeholder="Deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="newTask.deadline" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open2()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
+        <input type="text" data-datepicker-popup show-button-bar="false" placeholder="Deadline" class="form-control " uib-datepicker-popup="{{format}}" ng-model="newTask.deadline" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open2()" alt-input-formats="altInputFormats" ng-model-options="{timezone: 'utc'}" />
         <span class="input-group-btn">
             <button type="button" class="btn btn-default" id="calendar" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
@@ -17,6 +17,8 @@
             <option value: "Medium">Medium</option>
             <option value: "High">High</option>
         </select>
+    </div>
+    <div uib-alert ng-show="deadLineIncorrect" ng-class="'alert-danger'">Without a deadline, the motivation to do a task is small to nonexistant.        <span class="author"><i>- Robert W Bly</i></span>
     </div>
     <button type="button" ng-click="addTask(newTask, goal._id)" class="btn btn-primary">Add</button>
 </form>

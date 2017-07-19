@@ -8,12 +8,14 @@ app.factory('authFactory', function($http, $state) {
         return $http.post('/users/register', user)
             .then(function(response) {
                 auth.currentUser.username = response.data.username;
+                auth.currentUser.id = response.data._id;
             });
     };
     auth.login = function(user) {
         return $http.post('/users/login', user)
             .then(function(response) {
                 auth.currentUser.username = response.data.username;
+                auth.currentUser.id = response.data._id;
 
             })
     };
@@ -31,6 +33,7 @@ app.factory('authFactory', function($http, $state) {
         return $http.get('/users/logout')
             .then(function(response) {
                 auth.currentUser.username = null;
+                auth.currentUser.id = null;
                 $state.go("login")
             })
     };
