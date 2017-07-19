@@ -8,9 +8,7 @@ var goalRoutes = require('./routes/goalRoutes');
 var userRoutes = require('./routes/userRoutes');
 var User = require('./models/userModel')
 
-mongoose.connect('mongodb://localhost/goalistDB', function() {
-    console.log("DB connection established!!!");
-})
+mongoose.connect(process.env.CONNECTION_STRING||'mongodb://localhost/goalistDB');
 
 var app = express();
 
@@ -74,6 +72,5 @@ app.all('*', function(req, res) {
   res.sendFile(__dirname + "/public/index.html")
 })
 
-app.listen(8000, function() {
-    console.log("yo yo yo, on 8000!!")
-});
+app.listen(process.env.PORT || '8080');
+
